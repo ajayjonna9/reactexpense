@@ -2,39 +2,50 @@ import "./App.css";
 import ExpenseItem from "./Components/ExpenseItem/ExpenseItem";
 import Card from "./Components/Card/Card";
 import ExpanseForm from "./Components/expanseForm/expanseForm";
+import { useState } from "react";
 function App() {
-  const obj = [
+  const [obj, setObj] = useState([
     {
-      title: "carinsurence",
+      expeseTitle: "carinsurence",
+
+      expanseAmount: 200,
       date: new Date(2022, 11, 21),
-      cost: 200,
     },
     {
-      title: "homerent",
+      expeseTitle: "homerent",
+
+      expanseAmount: 500,
       date: new Date(2022, 11, 21),
-      cost: 500,
     },
     {
-      title: "laptop",
+      expeseTitle: "laptop",
+
+      expanseAmount: 600,
       date: new Date(2022, 11, 21),
-      cost: 600,
     },
     {
-      title: "newTv",
-      date: new Date(2022, 11, 21),
-      cost: 800,
+      expeseTitle: "newTv",
+
+      expanseAmount: 800,
+      date: new Date(2022 - 11 - 21),
     },
-  ];
+  ]);
+  const onadding = (data) => {
+    setObj((pre) => {
+      return [...pre, data];
+    });
+    console.log(obj);
+  };
   return (
     <Card>
       <h1>Expense tracker</h1>
-      <ExpanseForm />
+      <ExpanseForm onadding={onadding} />
       {obj.map((data) => {
         return (
           <ExpenseItem
-            title={data.title}
+            title={data.expeseTitle}
             date={data.date}
-            cost={data.cost}
+            cost={data.expanseAmount}
           ></ExpenseItem>
         );
       })}

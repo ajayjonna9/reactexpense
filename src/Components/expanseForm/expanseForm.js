@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ExpanseForm.css";
-const ExpanseForm = () => {
+const ExpanseForm = (props) => {
   //   const [expeseTitle, setExpeseTitle] = useState("");
   //   const [expanseAmount, setExpanseAmount] = useState("");
   //   const [date, setdate] = useState("");
@@ -9,6 +9,7 @@ const ExpanseForm = () => {
     expanseAmount: "",
     date: "",
   });
+  const { expeseTitle, expanseAmount, date } = inputValues;
 
   const onChangeInput = (e) => {
     e.preventDefault();
@@ -30,9 +31,11 @@ const ExpanseForm = () => {
       });
     } else {
       setInputValues((prevals) => {
+        console.log(typeof e.target.value);
+
         return {
           ...prevals,
-          date: e.target.value,
+          date: new Date(e.target.value),
         };
       });
     }
@@ -42,7 +45,14 @@ const ExpanseForm = () => {
     const obj = {
       ...inputValues,
     };
+    props.onadding(obj);
     console.log(obj);
+
+    setInputValues({
+      expeseTitle: "",
+      expanseAmount: "",
+      date: "",
+    });
   };
   return (
     <div className="form">
@@ -51,21 +61,21 @@ const ExpanseForm = () => {
         <input
           type="text"
           name="expanseTitle"
-          //value={expeseTitle}
+          value={expeseTitle}
           onChange={onChangeInput}
         ></input>
         <h5>Expanse Amount</h5>
         <input
           type="number"
           name="expanseAmount"
-          //value={expanseAmount}
+          value={expanseAmount}
           onChange={onChangeInput}
         ></input>
         <h5>Date</h5>
         <input
           type="date"
           name="date"
-          //value={date}
+          value={date}
           onChange={onChangeInput}
         ></input>
         <button type="submit">submit</button>
