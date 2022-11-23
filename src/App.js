@@ -3,7 +3,9 @@ import ExpenseItem from "./Components/ExpenseItem/ExpenseItem";
 import Card from "./Components/Card/Card";
 import ExpanseForm from "./Components/expanseForm/expanseForm";
 import { useState } from "react";
+import Filter from "./Components/Filter/Filter";
 function App() {
+  const [filter, setFilter] = useState("2020");
   const [obj, setObj] = useState([
     {
       expeseTitle: "carinsurence",
@@ -21,13 +23,13 @@ function App() {
       expeseTitle: "laptop",
 
       expanseAmount: 600,
-      date: new Date(2022, 11, 21),
+      date: new Date(2021, 11, 21),
     },
     {
       expeseTitle: "newTv",
 
       expanseAmount: 800,
-      date: new Date(2022 - 11 - 21),
+      date: new Date(2022, 11, 21),
     },
   ]);
   const onadding = (data) => {
@@ -36,11 +38,16 @@ function App() {
     });
     console.log(obj);
   };
+  const filterarr = obj.filter((ele) => {
+    return ele.date.getFullYear().toString() === filter;
+  });
+
   return (
     <Card>
       <h1>Expense tracker</h1>
       <ExpanseForm onadding={onadding} />
-      {obj.map((data) => {
+      <Filter onFilter={setFilter} filter={filter} />
+      {filterarr.map((data) => {
         return (
           <ExpenseItem
             title={data.expeseTitle}
