@@ -5,6 +5,7 @@ import ExpanseForm from "./Components/expanseForm/expanseForm";
 import { useState } from "react";
 import Filter from "./Components/Filter/Filter";
 import Elements from "./Components/Elements";
+import ExpanseChart from "./ExpanseChart";
 function App() {
   const [filter, setFilter] = useState("2020");
 
@@ -55,7 +56,7 @@ function App() {
 
       <ExpanseForm onadding={onadding} />
       <Filter onFilter={setFilter} filter={filter} />
-
+      <ExpanseChart chartData={filterarr} />
       <Elements filterarr={filterarr} />
     </Card>
   );
