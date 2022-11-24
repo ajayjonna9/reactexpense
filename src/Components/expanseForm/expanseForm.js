@@ -43,6 +43,7 @@ const ExpanseForm = (props) => {
   const onsubmit = (e) => {
     e.preventDefault();
     const obj = {
+      id: Math.random(),
       ...inputValues,
     };
     props.onadding(obj);
