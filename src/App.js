@@ -4,6 +4,7 @@ import Card from "./Components/Card/Card";
 import ExpanseForm from "./Components/expanseForm/expanseForm";
 import { useState } from "react";
 import Filter from "./Components/Filter/Filter";
+import Elements from "./Components/Elements";
 function App() {
   const [filter, setFilter] = useState("2020");
 
@@ -47,21 +48,6 @@ function App() {
   const filterarr = obj.filter((ele) => {
     return ele.date.getFullYear().toString() === filter;
   });
-  let element = <p>No expanse found</p>;
-  if (filterarr.length > 0) {
-    element = filterarr.map((data, ind) => {
-      return (
-        <ExpenseItem
-          key={data.id}
-          index={data.id}
-          title={data.expeseTitle}
-          date={data.date}
-          cost={data.expanseAmount}
-          //changeCost={changeCost}
-        ></ExpenseItem>
-      );
-    });
-  }
 
   return (
     <Card>
@@ -69,23 +55,8 @@ function App() {
 
       <ExpanseForm onadding={onadding} />
       <Filter onFilter={setFilter} filter={filter} />
-      {element}
-      {/* {filterarr.length === 0 ? (
-        <p>No expanse found</p>
-      ) : (
-        filterarr.map((data, ind) => {
-          return (
-            <ExpenseItem
-              key={data.id}
-              index={data.id}
-              title={data.expeseTitle}
-              date={data.date}
-              cost={data.expanseAmount}
-              //changeCost={changeCost}
-            ></ExpenseItem>
-          );
-        })
-      )} */}
+
+      <Elements filterarr={filterarr} />
     </Card>
   );
 }
